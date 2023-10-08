@@ -1,16 +1,50 @@
-# This is a sample Python script.
+import openai
+import speech_recognition as sr
+from gtts import gTTS
+import playsound
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+openai.api_key = "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"
 
+recognizer = sr.Recogniyer()
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def recognizer_speech():
+    with sr.Microphone() as source:
+        print("Listening...")
+        audio = recognition.listen(source)
+        print("Recognizing...")
 
+        try:
+            text = recognizer.recognize_google(audio)
+            return text
+        except sr.UnknownValueError:
+            print("Could not understand the audio.")
+            return ""
+        except sr.RequestError as e:
+            print(f"Could not request results; {e}")
+            return ""
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('Nate')
+        def text_to_speech(text)
+            tts = gTTS(text)
+            tts.save("response.mp3")
+            playsound.playsound("response.mp3")
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+        while True:
+            user_input = input("You: ")
+            response = openai.Completion.create(
+                engine="text-davinci-002"
+                prompt=f"You said: {user_input} \nAI:",
+                max_tokens=150
+            )
+            ai_response = response.choice[0].text.strip()
+            print(f"AI: {ai_response}")
+
+            if "exit" in user_input.lower():
+                break
+            if "speak" in user_input.lower():
+                speech = recognizer_speech()
+                print(f"You said: {speech}")
+
+            text_to_speech(ai_response)
+
+        print("Conversation ended.")
+
