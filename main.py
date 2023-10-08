@@ -1,5 +1,5 @@
 import openai
-import speech_recognition as sr
+import SpeechRecognition as sr
 from gtts import gTTS
 import playsound
 
@@ -23,7 +23,7 @@ def recognizer_speech():
             print(f"Could not request results; {e}")
             return ""
 
-        def text_to_speech(text)
+        def text_to_speech(text):
             tts = gTTS(text)
             tts.save("response.mp3")
             playsound.playsound("response.mp3")
@@ -31,7 +31,7 @@ def recognizer_speech():
         while True:
             user_input = input("You: ")
             response = openai.Completion.create(
-                engine="text-davinci-002"
+                engine="text-davinci-002",
                 prompt=f"You said: {user_input} \nAI:",
                 max_tokens=150
             )
