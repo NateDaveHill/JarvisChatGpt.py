@@ -1,16 +1,16 @@
 import openai
-import SpeechRecognition as sr
+import speech_recognition as sr
 from gtts import gTTS
 import playsound
 
 openai.api_key = "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"
 
-recognizer = sr.Recogniyer()
+recognizer = sr.Recognizer()
 
 def recognizer_speech():
     with sr.Microphone() as source:
         print("Listening...")
-        audio = recognition.listen(source)
+        audio = sr.listen(source)
         print("Recognizing...")
 
         try:
@@ -47,4 +47,8 @@ def recognizer_speech():
             text_to_speech(ai_response)
 
         print("Conversation ended.")
+
+
+
+    __init__.py
 
