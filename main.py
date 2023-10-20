@@ -4,6 +4,7 @@ from gtts import gTTS
 from playsound import playsound
 
 # Set your OpenAI API key here
+openai.api_key = "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"
 
 recognizer = sr.Recognizer()
 
