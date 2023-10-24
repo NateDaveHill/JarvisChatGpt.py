@@ -1,15 +1,16 @@
 import openai
-import speech_recognition as sr
+from speech_recognition import Microphone, Recognizer, exceptions, RequestError
 from gtts import gTTS
 from playsound import playsound
 
 # Set your OpenAI API key here
-openai.api_key = "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"
+openai.api_key = "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"
 
-recognizer = sr.Recognizer()
+recognizer = Recognizer()
+
 
 def recognize_speech():
-    with sr.Microphone() as source:
+    with Microphone() as source:
         print("Say something:")
         audio = recognizer.listen(source)
         print("Recognizing...")
@@ -17,17 +18,19 @@ def recognize_speech():
         try:
             recognized_text = recognizer.recognize_google(audio)
             return recognized_text
-        except sr.UnknownValueError:
+        except exceptions:
             print("Google Speech Recognition could not understand audio")
             return ""
-        except sr.RequestError as e:
+        except RequestError as e:
             print(f"Could not request results from Google Speech Recognition; {e}")
             return ""
+
 
 def text_to_speech(text):
     tts = gTTS(text)
     tts.save("response.mp3")
     playsound("response.mp3")
+
 
 while True:
     user_input = input("You: ")
